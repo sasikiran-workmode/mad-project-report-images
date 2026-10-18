@@ -1,0 +1,8 @@
+flowchart TB
+    A["Filtered Evidences<br/>(with relevance scores)"] --> B["Group by Claim<br/>cluster similar answers"]
+    B --> C["Compare Supporting Evidence<br/>check agreement / conflict"]
+    C --> D{"Consistent<br/>Evidence?"}
+    D -- Yes --> E["Aggregate Evidence<br/>merge and select best<br/>supporting sources"]
+    D -- No --> F["Mark as Conflicting<br/>keep multiple perspectives<br/>for debate"]
+    E --> G["Aggregated Evidence Set<br/>(with consistency / conflict labels)"]
+    F --> G

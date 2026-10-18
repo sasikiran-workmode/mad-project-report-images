@@ -1,0 +1,45 @@
+---
+config:
+  layout: elk
+  elk:
+    cycleBreakingStrategy: MODEL_ORDER
+    considerModelOrder: NODES_AND_EDGES
+    nodePlacementStrategy: BRANDES_KOEPF
+  theme: base
+  themeVariables:
+    background: "#ffffff"
+    primaryColor: "#ffffff"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    lineColor: "#000000"
+    secondaryColor: "#ffffff"
+    tertiaryColor: "#ffffff"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#ffffff"
+    fontFamily: Arial
+  flowchart:
+    curve: linear
+    htmlLabels: true
+---
+flowchart LR
+    subgraph CD["Conflict Detection Module"]
+        direction LR
+        D1["Detect Conflict<br/>analyze evidence"]
+        D2["Conflict Type<br/>factual / numerical /<br/>temporal / source"]
+    end
+    UQ["User Query<br/>natural language question"] --> ER["Evidence Retrieval<br/>relevant information from web / local"]
+    ER --> DEB
+    CD -- "conflict type" --> DEB
+    subgraph DEB["Debate Engine (Multi-Agent)"]
+        direction TB
+        A["Agent A<br/>initial answer"]
+        B["Agent B<br/>critique and counter"]
+        C["Agent C<br/>revise response"]
+        D["Agent D<br/>additional perspective"]
+    end
+    DEB -- "debate outputs" --> AS["Answer Selection<br/>ranking and verification"]
+    AS --> FR["Final Response<br/>best answer with citations"]
+    DEB -- "agent responses" --> EC["Evidence Checker<br/>verify claims and citations"]
+    EC <-- "verification feedback" --> ER
+    EC -- "feedback for next round" --> AS

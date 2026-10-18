@@ -1,0 +1,24 @@
+flowchart LR
+    Q["User Query"]
+    subgraph SA["Search Agents (Parallel)"]
+        direction TB
+        W["Web Agent<br/>(DuckDuckGo)"]
+        R["Reference Agent<br/>(Wikipedia)"]
+        S["Scholarly Agent<br/>(Crossref)"]
+        AI["AI Answer Agent<br/>(Gemini + Fallback)"]
+    end
+    EP["Evidence Processing<br/>- Relevance Filter<br/>- Claim Normalization"]
+    AG["EvidenceAggregator<br/>(Pairwise NLI Comparison)"]
+    D{"Disagreement?"}
+    DA["Direct Answer<br/>(Consistent evidence)"]
+    CC["Conflict Classification<br/>(Identify conflict type)"]
+    MD["Multi-Agent Debate<br/>(Propose → Critique → Revise → Judge)"]
+    FA["Final Answer<br/>(With evidence and sources)"]
+    Q --> SA
+    SA --> EP
+    EP --> AG
+    AG --> D
+    D -- No --> DA
+    D -- Yes --> CC
+    CC --> MD
+    MD --> FA

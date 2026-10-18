@@ -1,0 +1,7 @@
+flowchart LR
+    Q["User Query"] --> DDG["DuckDuckGo Search<br/>(Get top results)"]
+    DDG --> D{"Results<br/>Found?"}
+    D -- Yes --> P["Parse & Extract Results<br/>(Titles + Snippets + Links)"]
+    D -- No --> FB["Fallback Search<br/>(Alternate source)"]
+    FB --> P
+    P --> R["Return Search Results<br/>(Titles + Snippets + Links)"]

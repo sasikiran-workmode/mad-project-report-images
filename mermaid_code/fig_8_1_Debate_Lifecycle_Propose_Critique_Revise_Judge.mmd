@@ -1,0 +1,6 @@
+flowchart LR
+    P["1. Propose<br/>Agents generate<br/>initial answers<br/>with evidence"] --> C["2. Critique<br/>Agents analyze<br/>and find issues<br/>in others' answers"]
+    C --> R["3. Revise<br/>Agents improve<br/>answers based<br/>on critiques"]
+    R --> J["4. Judge<br/>Select the best<br/>answer using<br/>evidence and criteria"]
+    J --> F["Final Answer<br/>Most accurate<br/>and well-supported<br/>response"]
+    R -- "Feedback for next round<br/>(if needed)" --> C

@@ -1,0 +1,5 @@
+flowchart LR
+    A["Evidence Text<br/>(title + content)"] --> B["Compute Content-Word Overlap<br/>(query words ∩ evidence words)"]
+    B --> D{"Overlap<br/>Score ≥ T?"}
+    D -- Yes --> K["Keep Evidence<br/>(relevant)"]
+    D -- No --> X["Discard Evidence<br/>(not relevant)"]

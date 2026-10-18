@@ -1,0 +1,6 @@
+flowchart LR
+    Q["User Query<br/>(with context)"] --> P["Primary LLM API<br/>(Generate response)"]
+    P --> D{"API<br/>Success?"}
+    D -- Yes --> R["Return Response<br/>(from primary provider)"]
+    D -- No --> F["Fallback LLM<br/>(Local Provider)"]
+    F --> R

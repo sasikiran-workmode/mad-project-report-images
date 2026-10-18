@@ -1,0 +1,7 @@
+flowchart TB
+    A["Debate Round<br/>(agents discuss and revise)"] --> B["Check Early Stop Conditions<br/>• Maximum rounds reached?<br/>• High agreement among agents?<br/>• No significant improvement?<br/>• Confidence above threshold?"]
+    B --> D{"Any stop<br/>condition met?"}
+    D -- Yes --> S["Stop Debate<br/>Send final answers<br/>to judge"]
+    S --> F["Final Answer<br/>Most accurate<br/>and well-supported<br/>response"]
+    D -- No --> C["Continue Debate<br/>Next round of<br/>propose-critique-revise"]
+    C -- "Next Round" --> B

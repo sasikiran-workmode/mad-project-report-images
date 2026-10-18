@@ -1,0 +1,14 @@
+flowchart LR
+    UI["User Interface<br/>(Frontend / API)"]
+    QR["Query Router<br/>(Agent Selection)"]
+    OR["Orchestrator<br/>(Main Controller)"]
+    EV["Evidence Pipeline<br/>(Retrieval → Normalization)"]
+    NLI["NLI & Conflict Classifier<br/>(Evidence Comparison)"]
+    MD["Multi-Agent Debate<br/>(Propose → Critique → Revise → Judge)"]
+    RG["Response Generator<br/>(Final Answer)"]
+    UI <--> OR
+    QR <--> OR
+    OR <--> EV
+    OR <--> NLI
+    NLI --> MD
+    NLI --> RG

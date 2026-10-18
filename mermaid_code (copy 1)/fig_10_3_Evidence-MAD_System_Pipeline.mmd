@@ -1,0 +1,57 @@
+---
+config:
+  layout: elk
+  elk:
+    cycleBreakingStrategy: MODEL_ORDER
+    considerModelOrder: NODES_AND_EDGES
+    nodePlacementStrategy: BRANDES_KOEPF
+  theme: base
+  themeVariables:
+    background: "#ffffff"
+    primaryColor: "#ffffff"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    lineColor: "#000000"
+    secondaryColor: "#ffffff"
+    tertiaryColor: "#ffffff"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#ffffff"
+    fontFamily: Arial
+  flowchart:
+    curve: linear
+    htmlLabels: true
+---
+flowchart LR
+    UQ["User Query<br/>natural language question"] --> QG["Query-Aware Guard<br/>safety and relevance check"]
+    QG --> RT
+    QG -- "unsafe / out-of-scope" --> RJ["Reject / Fallback Response"]
+    subgraph RT["Evidence Retrieval"]
+        direction TB
+        W["Web Search<br/>(e.g., search API)"]
+        L["Local Retrieval<br/>(e.g., documents)"]
+    end
+    RT --> MAD
+    subgraph MAD["Multi-Agent Debate"]
+        direction TB
+        AA["Answer Agent<br/>(generates answer)"]
+        CA["Critic Agent<br/>(critiques evidence)"]
+        VA["Verifier Agent<br/>(checks citations)"]
+        RA["Revision Agent<br/>(refines answer)"]
+        AA --> CA
+        AA --> VA
+        CA --> VA
+        RA --> CA
+        RA --> VA
+    end
+    MAD --> AS["Answer Selection<br/>ranks candidates and selects final answer"]
+    AS --> FR["Final Response<br/>answer with citations and confidence score"]
+    subgraph SP["Supporting Components"]
+        direction LR
+        S1["Evidence Storage<br/>(cache + logs)"]
+        S2["Conflict Detection<br/>(NLI + conflict type)"]
+        S3["Monitoring & Evaluation<br/>(metrics + analysis)"]
+    end
+    SP -.-> RT
+    SP -.-> MAD
+    SP -.-> AS

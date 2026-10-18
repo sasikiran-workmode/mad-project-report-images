@@ -1,0 +1,14 @@
+flowchart TB
+    Q["User Query"]
+    QR["QueryRouter<br/>(Select Agents)"]
+    subgraph TP["ThreadPoolExecutor (Run in Parallel)"]
+        direction LR
+        W["Web Agent<br/>(DuckDuckGo)"]
+        R["Reference Agent<br/>(Wikipedia)"]
+        S["Scholarly Agent<br/>(Crossref)"]
+        AI["AI Answer Agent<br/>(Gemini + Fallback)"]
+    end
+    CR["Collected Results<br/>(From selected agents)"]
+    Q --> QR
+    QR --> TP
+    TP --> CR

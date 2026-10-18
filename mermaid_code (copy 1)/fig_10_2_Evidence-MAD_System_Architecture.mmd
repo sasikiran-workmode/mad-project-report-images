@@ -1,0 +1,37 @@
+---
+config:
+  layout: elk
+  elk:
+    cycleBreakingStrategy: MODEL_ORDER
+    considerModelOrder: NODES_AND_EDGES
+    nodePlacementStrategy: BRANDES_KOEPF
+  theme: base
+  themeVariables:
+    background: "#ffffff"
+    primaryColor: "#ffffff"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    lineColor: "#000000"
+    secondaryColor: "#ffffff"
+    tertiaryColor: "#ffffff"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#ffffff"
+    fontFamily: Arial
+  flowchart:
+    curve: linear
+    htmlLabels: true
+---
+flowchart LR
+    UQ["User Query<br/>natural language question"] --> QG["Query Guard<br/>safety + relevance checks"]
+    QG --> CS
+    subgraph CS["Core System"]
+        direction LR
+        ER["Evidence Retrieval<br/>(web + local)"] --> EF["Evidence Filtering<br/>(quality + relevance)"]
+        EF --> DE["Debate Engine<br/>(multi-agent)"]
+        DE --> AS["Answer Selection<br/>(verification + ranking)"]
+    end
+    CS --> FR["Final Response<br/>with citations"]
+    ST["Storage<br/>logs + cache"] <-.-> CS
+    ST -.-> ER
+    ST <-.-> EX["External Sources<br/>Web Search<br/>APIs<br/>Local Files"]

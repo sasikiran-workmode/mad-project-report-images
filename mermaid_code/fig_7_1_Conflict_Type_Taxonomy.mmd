@@ -1,0 +1,18 @@
+flowchart TB
+    R["Conflict Types<br/>(in Evidence-MAD)"]
+    F["Factual Conflict<br/>different facts<br/>about the same entity"]
+    N["Numerical Conflict<br/>different numbers<br/>or quantities"]
+    T["Temporal Conflict<br/>different time<br/>information"]
+    S["Source Conflict<br/>different claims<br/>from reliable sources"]
+    F1["e.g., different<br/>birth dates"]
+    N1["e.g., different<br/>population counts"]
+    T1["e.g., different<br/>years or dates"]
+    S1["e.g., conflicting<br/>statements from<br/>authoritative sources"]
+    R --> F
+    R --> N
+    R --> T
+    R --> S
+    F --> F1
+    N --> N1
+    T --> T1
+    S --> S1

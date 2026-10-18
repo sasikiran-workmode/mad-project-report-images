@@ -1,0 +1,12 @@
+flowchart TB
+    B["NLIDetector<br/>(Abstract Base Class)<br/>detect(premise, hypothesis)<br/>get_label()<br/>get_confidence()"]
+    L["LocalNLI<br/>detect()<br/>get_label()<br/>get_confidence()"]
+    A["APINLI<br/>detect()<br/>get_label()<br/>get_confidence()"]
+    E["EnsembleNLI<br/>detect()<br/>get_label()<br/>get_confidence()"]
+    R["NLIResult<br/>label (entailment / contradiction / neutral)<br/>confidence (float)"]
+    B --> L
+    B --> A
+    B --> E
+    L --> R
+    A --> R
+    E --> R

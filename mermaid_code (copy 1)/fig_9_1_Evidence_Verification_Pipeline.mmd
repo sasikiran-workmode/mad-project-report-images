@@ -1,0 +1,38 @@
+---
+config:
+  layout: elk
+  elk:
+    cycleBreakingStrategy: MODEL_ORDER
+    considerModelOrder: NODES_AND_EDGES
+    nodePlacementStrategy: BRANDES_KOEPF
+  theme: base
+  themeVariables:
+    background: "#ffffff"
+    primaryColor: "#ffffff"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    lineColor: "#000000"
+    secondaryColor: "#ffffff"
+    tertiaryColor: "#ffffff"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#ffffff"
+    fontFamily: Arial
+  flowchart:
+    curve: linear
+    htmlLabels: true
+---
+flowchart TB
+    A["Claim<br/>(from agent response)"] --> B["Evidence Retrieval<br/>- search trusted sources<br/>- collect top-k evidence snippets"]
+    B --> C["Evidence Matching<br/>- check claim-evidence relevance<br/>- filter irrelevant snippets"]
+    C --> VC
+    subgraph VC["Verification Checks"]
+        direction LR
+        S["Source Check<br/>- reliable source?<br/>- authoritative domain?"]
+        T["Content Check<br/>- supports claim?<br/>- contradicts claim?"]
+        U["Citation Check<br/>- valid citation?<br/>- no fabricated source?"]
+    end
+    VC --> D{"Claim<br/>Supported?"}
+    D -- Yes --> V["Verified Evidence<br/>- supported claim<br/>- evidence with citations<br/>- high confidence"]
+    D -- No --> X["Conflicting Evidence<br/>- contradicting evidence<br/>- highlight source differences<br/>- send to debate module"]
+    D -- Uncertain --> N["Needs More Evidence<br/>- insufficient evidence<br/>- retrieve additional sources"]

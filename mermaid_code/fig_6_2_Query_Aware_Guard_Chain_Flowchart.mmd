@@ -1,0 +1,10 @@
+flowchart TB
+    Q["User Query<br/>(input)"] --> QA["Query Analysis<br/>• detect intent<br/>• extract key terms"]
+    QA --> SC["Safety Check<br/>• harmful content<br/>• sensitive topics<br/>• policy violations"]
+    SC --> U{"Unsafe<br/>Query?"}
+    U -- Yes --> BL["Block Response<br/>(safety message)"]
+    U -- No --> RC["Relevance Check<br/>• within domain<br/>• has enough context"]
+    RC --> RQ{"Relevant<br/>Query?"}
+    RQ -- No --> OS["Handle Out-of-Scope<br/>(clarification message)"]
+    RQ -- Yes --> PP["Proceed to Processing<br/>• retrieve evidence<br/>• continue pipeline"]
+    PP --> SR["Safe and Relevant Query<br/>(send to agents)"]

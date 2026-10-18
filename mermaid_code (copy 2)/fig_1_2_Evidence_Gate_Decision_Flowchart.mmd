@@ -1,0 +1,6 @@
+flowchart LR
+    A["Search Results<br/>(Title + Snippet)"] --> B["Relevance Filter<br/>(Content-word overlap)"]
+    B --> C["Claim Normalization<br/>(Extract atomic claims)"]
+    C --> D{"Any relevant<br/>snippets?"}
+    D -- Yes --> E["Pass to EvidenceAggregator<br/>(NLI comparison)"]
+    D -- No --> F["NO_RELEVANT_RESULTS<br/>(Return to user)"]

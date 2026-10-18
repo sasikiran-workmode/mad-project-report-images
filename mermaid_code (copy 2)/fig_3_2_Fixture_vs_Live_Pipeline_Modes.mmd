@@ -1,0 +1,10 @@
+flowchart TB
+    subgraph LIVE["LIVE Mode (Real-Time Data)"]
+        direction LR
+        L1["User Query<br/>(Real-time)"] --> L2["External APIs<br/>(Web, Wikipedia, Crossref, LLM)"] --> L3["Run Pipeline<br/>(Live responses)"]
+    end
+    subgraph FIX["FIXTURE Mode (Predefined Data)"]
+        direction LR
+        F1["User Query<br/>(Test set)"] --> F2["Local Fixture Data<br/>(Predefined responses)"] --> F3["Run Pipeline<br/>(No external APIs)"]
+    end
+    FIX ~~~ LIVE
